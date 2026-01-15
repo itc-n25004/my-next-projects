@@ -1,4 +1,6 @@
 import "./globals.css";
+import Header from "./compornents/Header";
+import Footer from "./compornents/Footer";
 
 export default function RootLayout({
   children,
@@ -6,9 +8,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
     <body>
+      <Header />
       {children}
+      <Footer />
     </body>
     </html>
   );
