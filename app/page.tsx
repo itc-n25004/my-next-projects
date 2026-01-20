@@ -1,37 +1,12 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+import Image from "next/image";
+import { getNewsList } from "@/app/libs/microms";
+import { TOP_NEWS_LIMIT } from "@/app/constance";
 import BottonLink from "@/app/compornents/BottonLink";
 import NewsList from "@/app/compornents/NewsList";
-import { News } from "@/app/libs/microms";
 
-const data: { contents: News[] } = {
-  contents: [
-    {
-      id: "1",
-      title: "渋谷にオフィスを移転しました",
-      category: { name: "更新情報" },
-      publishedAt: "2023/05/19",
-      createdAt: "2023/05/19",
-    },
-    {
-      id: "2",
-      title: "当社CEOが業界トップリーダーTOP30に選出されました",
-      category: { name: "更新情報" },
-      publishedAt: "2023/05/19",
-      createdAt: "2023/05/19",
-    },
-    {
-      id: "3",
-      title: "テストの記事です",
-      category: { name: "更新情報" },
-      publishedAt: "2023/05/19",
-      createdAt: "2023/05/19",
-    },
-  ],
-};
-
-export default function Home() {
-  const slicedData = data.contents.slice(0, 2);
+export default  async function Home() {
+  const data = await getNewsList({ limit: TOP_NEWS_LIMIT,});
   const name = "世界";
 
   return (
@@ -55,7 +30,7 @@ export default function Home() {
 
       <section className={styles.news}>
         <h2 className={styles.newsTitle}>News</h2>
-                <NewsList news={slicedData} />
+                <NewsList news={data.contents} />
         <div className={styles.newsLink}> 
           <BottonLink href="/news">もっと見る</BottonLink>
         </div>

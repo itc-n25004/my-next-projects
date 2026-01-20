@@ -1,15 +1,9 @@
 import Image from "next/image";
 import styles from "./index.module.css";
+import Category from "@/sample_data/app/_components/Category";
+import Date from "@/app/compornents/Date";
 import Link from "next/link";
-
-type News = {
-  id: string;
-
-  title: string;
-  category: { name: string };
-  publishedAt: string;
-  createdAt: string;
-};
+import { News } from "@/app/libs/microms";
 
 type Props = {
   news: News[];
@@ -25,27 +19,30 @@ export default function NewsList({ news }: Props) {
       {news.map((article) => (
         <li key={article.id} className={styles.list}>
           <Link href={`/news/${article.id}`} className={styles.link}>
-            <Image
-              className={styles.image}
-              src="/no-image.png"
-              alt="No-Image"
-              width={1200}
-              height={630}
-            />
+            {article.thumbnail ? (
+              <Image
+                src={article.thumbnail.url}
+                alt=""
+                className={styles.image}
+                width={article.thumbnail.width}
+                height={article.thumbnail.height}
+                />
+              ):
+              (
+                <Image
+                  src="/no-image.png"
+                  alt="No Image"
+                  className={styles.image}
+                  width={1200}
+                  height={630}
+                />
+              )} 
             <dl className={styles.content}>
               <dt className={styles.title}>{article.title}</dt>
               <dd className={styles.meta}>
                 <span className={styles.tag}>{article.category.name}</span>
-                <span className={styles.date}>
-                  <Image
-                    src="/clock.svg"
-                    alt=""
-                    width={16}
-                    height={16}
-                    priority
-                  />
-                  {article.createdAt}
-                </span>
+                <Category category={article.category} />
+                <Date date={article.publishedAt ?? article.createdAt} />
               </dd>
             </dl>
             </Link>
