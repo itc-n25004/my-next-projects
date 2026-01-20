@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./index.module.css";
-import Category from "@/sample_data/app/_components/Category";
+import Category from "@/app/compornents/Category";
 import Date from "@/app/compornents/Date";
 import Link from "next/link";
 import { News } from "@/app/libs/microms";
