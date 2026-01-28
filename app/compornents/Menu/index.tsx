@@ -14,7 +14,7 @@ export default function Menu() {
         <nav className={cx(styles.nav, {[styles.open]: isOpen})}>
             <ul className={styles.items}>
                 <li>
-                    <Link href="/NewsList">ニュース</Link>
+                    <Link href="/news">ニュース</Link>
                 </li>
                 <li>
                     <Link href="/contact">お問い合わせ</Link>
