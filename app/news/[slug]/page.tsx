@@ -1,7 +1,7 @@
 import {notFound}  from "next/navigation";
 import { getNewsDetail } from "@/app/libs/microms";
 import Article from "@/app/compornents/Article";
-import ButtonLink from "@/sample_data/app/_components/ButtonLink";
+import ButtonLink from "@/app/compornents/BottonLink";
 import styles from "./page.module.css";
 type Props = {
     params: {
