@@ -23,7 +23,10 @@ export default async function  Page({ params }: Props){
     const category = await getCategoryDetail(params.id).catch(notFound);
     
     const {contents: news, totalCount} = await getNewsList({
-         offset: (current -1) * NEWS_LIST_LIMIT, limit: NEWS_LIST_LIMIT,});
+         offset: (current -1) * NEWS_LIST_LIMIT, 
+         limit: NEWS_LIST_LIMIT,
+         filters: `categories[equal]${category.id}`,
+    });
     if (news.length ===0) {
         return notFound();
     }
@@ -31,7 +34,9 @@ export default async function  Page({ params }: Props){
     return (
         <>
             <NewsList news={news}/>
-            <Pagination totalCount={totalCount} current={current} basePath={`/news/category/${category.id}`}/>
+            <Pagination 
+            totalCount={totalCount} 
+            basePath={`/news/category/${category.id}`}/>
         </>
     );
 }

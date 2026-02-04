@@ -12,18 +12,21 @@ type Props = {
 
 export default async function Page({params}: Props){
     const category = await getCategoryDetail(params.id).catch(notFound);
+    console.log(category);
     const {contents:news, totalCount} = await getNewsList({
         limit: NEWS_LIST_LIMIT,
-        filters: `categories[equal]${category.id}`,
+        filters: `category[equals]${category.id}`,
     });
-
+    console.log(news);
     return(
         <>
         <p>
             <Category category={category}/>の一覧
         </p>
         <NewsList news={news}/>
-        <Pagination totalCount={totalCount} current={1} basePath={`/news/category/${category.id}`}/>
+        <Pagination totalCount={totalCount} 
+        current={1} 
+        basePath={`/news/category/${category.id}`}/>
         </>
     )
 }
